@@ -1,0 +1,48 @@
+name: Automated Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      deployment_target:
+        description: Choose target
+        required: true
+        default:
+        type: choice
+        options:
+          - test_click_button_exams
+
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python env
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install Chrome
+        run: sudo apt-get install google-chrome-stable
+
+      - name: Clear pip cache
+        run: pip cache purge
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+#      - name: Start virtual display
+#        run: |
+#          sudo apt-get install xvfb
+#          Xvfb :99 & export DISPLAY=:99
+
+      - name: Run test_click_button_exams
+        if: "github.event.inputs.deployment_target == 'test_click_button_exams'"
+        env:
+          DISPLAY: :99
+        run: PYTHONPATH=. pytest tests/test_home_page.py::test_click_button_exams
+
+
