@@ -13,6 +13,7 @@ on:
           - test_click_legalisation_button
           - test_click_about_us_button
           - test_click_contact_button
+          - test_click_ukrainian_version_button
           -
 
 
@@ -69,5 +70,12 @@ jobs:
         env:
           DISPLAY: :99
         run: PYTHONPATH=. pytest tests/test_home_page.py::test_click_contact_button
+
+
+      - - name: Run test_click_ukrainian_version_button
+          if: "github.event.inputs.deployment_target == 'test_click_ukrainian_version_button'"
+          env:
+            DISPLAY: :99
+          run: PYTHONPATH=. pytest tests/test_home_page.py::test_click_ukrainian_version_button
 
 

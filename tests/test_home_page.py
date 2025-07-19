@@ -36,3 +36,14 @@ def test_click_contact_button(driver):
     homepage.open()
     homepage.click_contact_button()
     assert "https://en.together.edu.pl/contact" in driver.current_url
+
+
+# The test checks the click of the "Ukrainian version" button on the header and goes to the Ukrainian version of the site
+def test_click_ukrainian_version_button(driver):
+    homepage = HomePage(driver)
+    homepage.open()
+    homepage.click_ukrainian_version_button()
+    assert driver.find_element(
+    By.XPATH,
+    "//strong[normalize-space(text())='Школа польської мови Together']"
+    )

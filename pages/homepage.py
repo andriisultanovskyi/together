@@ -17,6 +17,7 @@ class HomePage(BasePage):
     )
     ABOUT_US_BUTTON = (By.XPATH, "//a[@href='/aboutus' and normalize-space(text())='About us']")
     CONTACT_BUTTON = (By.XPATH, "//a[@href='/contact' and normalize-space(text())='Contact']")
+    UKRAINIAN_VERSION_BUTTON = (By.XPATH, "//a[normalize-space(text())='Українська версія']")
 
     def open(self):
         super().open(self.URL)
@@ -35,5 +36,9 @@ class HomePage(BasePage):
 
     def click_contact_button(self):
         self.wait_for_element_to_be_clickable(self.CONTACT_BUTTON).click()
+
+
+    def click_ukrainian_version_button(self):
+        self.wait_for_element_to_be_clickable(self.UKRAINIAN_VERSION_BUTTON).click()
 
 
