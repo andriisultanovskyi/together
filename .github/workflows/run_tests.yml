@@ -10,6 +10,10 @@ on:
         type: choice
         options:
           - test_click_button_exams
+          - test_click_legalisation_button
+          - test_click_about_us_button
+          - test_click_contact_button
+          -
 
 
 jobs:
@@ -44,5 +48,26 @@ jobs:
         env:
           DISPLAY: :99
         run: PYTHONPATH=. pytest tests/test_home_page.py::test_click_button_exams
+
+
+      - name: Run test_click_legalisation_button
+        if: "github.event.inputs.deployment_target == 'test_click_legalisation_button'"
+        env:
+          DISPLAY: :99
+        run: PYTHONPATH=. pytest tests/test_home_page.py::test_click_legalisation_button
+
+
+      - name: Run test_click_about_us_button
+        if: "github.event.inputs.deployment_target == 'test_click_about_us_button'"
+        env:
+          DISPLAY: :99
+        run: PYTHONPATH=. pytest tests/test_home_page.py::test_click_about_us_button
+
+
+      - name: Run test_click_contact_button
+        if: "github.event.inputs.deployment_target == 'test_click_contact_button'"
+        env:
+          DISPLAY: :99
+        run: PYTHONPATH=. pytest tests/test_home_page.py::test_click_contact_button
 
 

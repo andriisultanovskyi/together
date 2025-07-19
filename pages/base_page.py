@@ -6,8 +6,9 @@ from selenium.webdriver.common.by import By
 
 class BasePage:
     DEFAULT_TIMEOUT = 10
-    def __init__(self, driver):
+    def __init__(self, driver, timeout=10):
         self.driver = driver
+        self.timeout = timeout
 
 
     def find_element(self, locator, timeout=DEFAULT_TIMEOUT):
@@ -40,16 +41,21 @@ class BasePage:
     By.XPATH, ".//button[contains(@class, 'cky-btn-accept') and contains(text(), 'Akceptuj wszystko')]")
 
 
-    def close_cookie_popup(self, timeout=DEFAULT_TIMEOUT):
+    def close_cookie_popup(self, timeout=None):
+        if timeout is None:
+            timeout = self.timeout
+        print("Trying to close cookie popup")
         try:
             WebDriverWait(self.driver, timeout).until(
                 EC.presence_of_element_located(self.COOKIE_POPUP_CONTAINER)
             )
+            print("Cookie popup was found.")
             accept_button = WebDriverWait(self.driver, timeout).until(
                 EC.element_to_be_clickable(self.COOKIE_ACCEPT_BUTTON)
             )
             accept_button.click()
-            print("Cookie popup closed")
+            print("The cookie popup button is pressed")
+            self.wait_for_element_to_disappear(self.COOKIE_POPUP_CONTAINER, timeout=timeout)
         except TimeoutException:
             print("Cookie popup not found — probably already closed.")
         except Exception as e:
