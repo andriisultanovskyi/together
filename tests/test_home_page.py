@@ -1,8 +1,5 @@
-import pytest
+
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from datetime import datetime
 from pages.homepage import HomePage
 
 
@@ -38,12 +35,37 @@ def test_click_contact_button(driver):
     assert "https://en.together.edu.pl/contact" in driver.current_url
 
 
-# The test checks the click of the "Ukrainian version" button on the header and goes to the Ukrainian version of the site
+# The test checks the click of the "Ukrainian version" button on the header and opens a web page in Ukrainian
 def test_click_ukrainian_version_button(driver):
     homepage = HomePage(driver)
     homepage.open()
     homepage.click_ukrainian_version_button()
-    assert driver.find_element(
-    By.XPATH,
-    "//strong[normalize-space(text())='Школа польської мови Together']"
-    )
+    element = homepage.wait_for_element_visible((
+            By.XPATH,
+            "//strong[contains(text(), 'Школа польської мови Together')]"
+        ))
+    assert element.is_displayed()
+
+
+# The test checks the click of the "PL" button on the header and opens a web page in Polish
+def test_click_pl_button(driver):
+    homepage = HomePage(driver)
+    homepage.open()
+    homepage.click_pl_button()
+    element = homepage.wait_for_element_visible((
+            By.XPATH,
+            "//span[contains(text(), 'Polski otworzy Ci nowe możliwości')]"
+        ))
+    assert element.is_displayed()
+
+
+# The test checks the click of the "RU" button on the header and opens a web page in Russian
+def test_click_ru_button(driver):
+    homepage = HomePage(driver)
+    homepage.open()
+    homepage.click_ru_button()
+    element = homepage.wait_for_element_visible((
+            By.XPATH,
+            "//div[normalize-space()='Польский — твой ключ к новым возможностям! Учись у профессионалов.']"
+        ))
+    assert element.is_displayed()
