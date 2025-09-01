@@ -16,7 +16,9 @@ on:
           - test_click_ukrainian_version_button
           - test_click_pl_button
           - test_click_ru_button
-          -
+          - test_courses_param
+          - test_courses_offline
+          - test_courses_online
 
 
 jobs:
@@ -93,5 +95,26 @@ jobs:
         env:
           DISPLAY: :99
         run: PYTHONPATH=. pytest tests/test_home_page.py::test_click_ru_button
+
+
+      - name: Run test_courses_param
+        if: "github.event.inputs.deployment_target == 'test_courses_param'"
+        env:
+          DISPLAY: :99
+        run: PYTHONPATH=. pytest tests/test_dropdown.py::test_courses_param
+
+
+      - name: Run test_courses_offline
+        if: "github.event.inputs.deployment_target == 'test_courses_offline'"
+        env:
+          DISPLAY: :99
+        run: PYTHONPATH=. pytest tests/test_dropdown.py::test_courses_offline
+
+
+      - name: Run test_courses_online
+        if: "github.event.inputs.deployment_target == 'test_courses_online'"
+        env:
+          DISPLAY: :99
+        run: PYTHONPATH=. pytest tests/test_dropdown.py::test_courses_online
 
 
