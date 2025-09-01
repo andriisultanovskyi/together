@@ -2,6 +2,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
 
 
 class BasePage:
@@ -40,10 +41,22 @@ class BasePage:
     def get_current_url(self):
         return self.driver.current_url
 
+    def wait_for_element_to_disappear(self, locator, timeout=DEFAULT_TIMEOUT):
+        try:
+            WebDriverWait(self.driver, timeout).until(
+                EC.invisibility_of_element_located(locator)
+            )
+            return True
+        except TimeoutException:
+            print(f"Element {locator} did not disappear within {timeout} seconds")
+            return False
+
     COOKIE_POPUP_CONTAINER = (
-        By.XPATH, "//div[@class='cky-consent-container' and @aria-label='Cenimy prywatność użytkowników']")
+        By.XPATH, "//div[@aria-label='Cenimy prywatność użytkowników']"
+    )
     COOKIE_ACCEPT_BUTTON = (
-        By.XPATH, ".//button[contains(@class, 'cky-btn-accept') and contains(text(), 'Akceptuj wszystko')]")
+        By.XPATH, ".//button[contains(@class, 'cky-btn-accept') and contains(text(), 'Akceptuj wszystko')]"
+    )
 
     def close_cookie_popup(self, timeout=None):
         if timeout is None:
@@ -68,3 +81,8 @@ class BasePage:
     def open(self, url):
         self.driver.get(url)
         self.close_cookie_popup()
+
+    def hover(self, element):
+        """Hover over element"""
+        actions = ActionChains(self.driver)
+        actions.move_to_element(element).perform()
