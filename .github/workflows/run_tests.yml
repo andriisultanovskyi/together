@@ -117,4 +117,29 @@ jobs:
           DISPLAY: :99
         run: PYTHONPATH=. pytest tests/test_dropdown.py::test_courses_online
 
+      - name: Run test_your_polish_button
+        if: "github.event.inputs.deployment_target == 'test_click_test_your_polish_button'"
+        env:
+          DISPLAY: :99
+        run: PYTHONPATH=. pytest tests/test_home_page.py::test_click_test_your_polish_button
 
+
+      - name: Run test_click_register_for_your_certificate
+        if: "github.event.inputs.deployment_target == 'test_click_register_for_your_certificate'"
+        env:
+          DISPLAY: :99
+        run: PYTHONPATH=. pytest tests/test_home_page.py::test_click_register_for_your_certificate
+
+
+      - name: Run test_click_revisit_consent_button
+        if: "github.event.inputs.deployment_target == 'test_click_revisit_consent_button'"
+        env:
+          DISPLAY: :99
+        run: PYTHONPATH=. pytest tests/test_home_page.py::test_click_revisit_consent_button
+
+
+      - name: Run test_click_contact_information_button
+        if: "github.event.inputs.deployment_target == 'test_click_contact_information_button'"
+        env:
+          DISPLAY: :99
+        run: PYTHONPATH=. pytest tests/test_home_page.py::test_click_contact_information_button
