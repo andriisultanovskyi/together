@@ -76,8 +76,6 @@ class HomePage(BasePage):
 
     INDIVIDUAL_CLASSES_ON = (By.XPATH, "(//span[normalize-space(text())='Individual classes'])[2]")
 
-    # INDIVIDUAL_CLASSES_ON = (By.XPATH, "//span[normalize-space(text())='Individual classes']/ancestor:://a[@data-menu-item-number='3'")
-
     POLISH_LANGUAGE_IN_MEDICINE = (By.XPATH, "//span[normalize-space(text())='Polish language in Medicine']")
 
     COMPANY_COURSES_OFF = (By.XPATH, "(//span[normalize-space(text())='Company courses'])[1]")
@@ -98,7 +96,13 @@ class HomePage(BasePage):
 
     TELC_COURSE = (By.XPATH, "//span[normalize-space(text())='TELC course']")
 
+    TEST_YOUR_POLISH = (By.XPATH, "//span[contains(normalize-space(.), 'Test your Polish')]")
 
+    REGISTER_FOR_YOUR_CERTIFICATE = (By.XPATH, "//span[contains(normalize-space(.), 'certificate exam')]")
+
+    REVISIT_CONSENT_BUTTON = (By.XPATH, "//img[@alt='Revisit consent button']")
+
+    CONTACT_INFORMATION_BUTTON = (By.CLASS_NAME, "t708__btn")
 
 
 
@@ -193,3 +197,14 @@ class HomePage(BasePage):
     def click_individual_classes_on(self):
         self.wait_for_element_to_be_clickable(self.INDIVIDUAL_CLASSES_ON).click()
 
+    def click_test_your_polish_button(self):
+        self.wait_for_element_to_be_clickable(self.TEST_YOUR_POLISH).click()
+
+    def click_register_for_your_certificate(self):
+        self.wait_for_element_to_be_clickable(self.REGISTER_FOR_YOUR_CERTIFICATE).click()
+
+    def click_revisit_consent_button(self):
+        self.wait_for_element_to_be_clickable(self.REVISIT_CONSENT_BUTTON).click()
+
+    def click_contact_information_button(self):
+        self.wait_for_element_to_be_clickable(self.CONTACT_INFORMATION_BUTTON).click()

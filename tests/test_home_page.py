@@ -69,3 +69,37 @@ def test_click_ru_button(driver):
             "//div[normalize-space()='Польский — твой ключ к новым возможностям! Учись у профессионалов.']"
         ))
     assert element.is_displayed()
+
+
+# The test checks the click of the "Test your Polish" button on the header and opens a web page in Russian
+def test_click_test_your_polish_button(driver):
+    homepage = HomePage(driver)
+    homepage.open()
+    homepage.click_test_your_polish_button()
+    assert "https://en.together.edu.pl/test_poziomujacy" in driver.current_url
+
+
+def test_click_register_for_your_certificate(driver):
+    homepage = HomePage(driver)
+    homepage.open()
+    homepage.click_register_for_your_certificate()
+    assert "https://en.together.edu.pl/stateexam" in driver.current_url
+
+
+def test_click_revisit_consent_button(driver):
+    homepage = HomePage(driver)
+    homepage.open()
+    homepage.click_revisit_consent_button()
+    element = homepage.wait_for_element_visible((
+        By.XPATH,
+        "//span[normalize-space()='Dostosuj preferencje dotyczące zgody']"
+    ))
+    assert element.is_displayed()
+
+
+def test_click_contact_information_button(driver):
+    homepage = HomePage(driver)
+    homepage.open()
+    homepage.click_contact_information_button()
+    element = homepage.wait_for_element_visible((By.CLASS_NAME, "t708__wrapper"))
+    assert element.is_displayed()
