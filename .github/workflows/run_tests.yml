@@ -19,6 +19,10 @@ on:
           - test_courses_param
           - test_courses_offline
           - test_courses_online
+          - test_your_polish_button
+          - test_click_register_for_your_certificate
+          - test_click_revisit_consent_button
+          - test_click_contact_information_button
 
 
 jobs:
