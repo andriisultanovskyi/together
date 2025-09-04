@@ -19,7 +19,7 @@ on:
           - test_courses_param
           - test_courses_offline
           - test_courses_online
-          - test_your_polish_button
+          - test_click_test_your_polish_button
           - test_click_register_for_your_certificate
           - test_click_revisit_consent_button
           - test_click_contact_information_button
@@ -121,7 +121,7 @@ jobs:
           DISPLAY: :99
         run: PYTHONPATH=. pytest tests/test_dropdown.py::test_courses_online
 
-      - name: Run test_your_polish_button
+      - name: Run test_click_test_your_polish_button
         if: "github.event.inputs.deployment_target == 'test_click_test_your_polish_button'"
         env:
           DISPLAY: :99
