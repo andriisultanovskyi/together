@@ -32,7 +32,7 @@ def create_driver_instance():
     options.add_argument("--no-sandbox")
     options.add_argument("--headless")
     options.add_argument("--window-size=1920,1080")
-    driver_obj = webdriver.Chrome( # Переименовал переменную здесь
+    driver_obj = webdriver.Chrome(
         service=Service(ChromeDriverManager().install()),
         options=options
     )
@@ -46,7 +46,7 @@ def driver():
     driver_obj.quit()
     # Clearing the temporary folder after completing the test
     try:
-        shutil.rmtree(user_data_dir)  # Теперь user_data_dir доступен для очистки
+        shutil.rmtree(user_data_dir)
         logger.info(f"Deleted user data directory: {user_data_dir}")
     except OSError as e:
         logger.error(f"Error deleting user data directory {user_data_dir}: {e}")
