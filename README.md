@@ -35,9 +35,11 @@ Installation and launch
 1.  ```bash
 git clone https:https://github.com/andriisultanovskyi/together
 cd project
-2. Install dependencies
+2. ```bash
+Install dependencies
 pip install -r requirements.txt
-3. Run tests
+3. ```bash
+Run tests
 pytest -v
 
 Technologies used
