@@ -6,6 +6,7 @@ class HomePage(BasePage):
     URL = 'https://en.together.edu.pl/'
 
     EXAMS_BUTTON = (By.XPATH, "//a[@href='/exams' and normalize-space(text())='Exams']")
+
     LEGALISATION_BUTTON = (
         By.XPATH,
         "//a[contains(@class, 't199__menu-item') and "
