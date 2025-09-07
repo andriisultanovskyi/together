@@ -194,11 +194,6 @@ class HomePage(BasePage):
     def click_contact_information_button(self):
         self.wait_for_element_to_be_clickable(self.CONTACT_INFORMATION_BUTTON).click()
 
-    # def hover_element(self, locator):
-    #     element = self.wait_for_element_visible(locator)
-    #     self.hover(element)
-    #     return element
-
     def hover_courses(self):
         return self.hover_element(self.COURSES_BUTTON)
 
@@ -207,18 +202,3 @@ class HomePage(BasePage):
 
     def hover_online(self):
         return self.hover_element(self.ONLINE)
-
-    # def hover_courses(self):
-    #     element = self.wait_for_element_visible(self.COURSES_BUTTON)
-    #     self.hover(element)
-    #     return element
-    #
-    # def hover_offline(self):
-    #     element = self.wait_for_element_visible(self.OFFLINE)
-    #     self.hover(element)
-    #     return element
-    #
-    # def hover_online(self):
-    #     element = self.wait_for_element_visible(self.ONLINE)
-    #     self.hover(element)
-    #     return element
