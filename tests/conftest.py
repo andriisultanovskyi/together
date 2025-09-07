@@ -8,13 +8,11 @@ from webdriver_manager.chrome import ChromeDriverManager
 import tempfile
 import shutil
 import logging
-import os
 import urllib3
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 from selenium.webdriver.chrome.options import Options
-from selenium.common.exceptions import TimeoutException, NoSuchElementException, ElementClickInterceptedException, \
-    ElementNotInteractableException
+from selenium.common.exceptions import TimeoutException
 
 # Logging settings
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -33,8 +31,6 @@ def create_driver_instance():
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--no-sandbox")
     options.add_argument("--headless")
-    # options.add_argument("--headless=new")
-    # options.add_argument("--headless=old")
     options.add_argument("--window-size=1920,1080")
     driver_obj = webdriver.Chrome( # Переименовал переменную здесь
         service=Service(ChromeDriverManager().install()),
@@ -65,9 +61,9 @@ def close_cookie_popup(driver, timeout=10):
                 "//div[@class='cky-consent-container' and @aria-label='Cenimy prywatność użytkowników']"))
         )
         accept_button = WebDriverWait(driver, timeout).until(
-            EC.element_to_be_clickable((By.XPATH,
-                                        ".//button[contains(@class, 'cky-btn-accept') and contains(text(), 'Akceptuj "
-                                        "wszystko')]"))
+            EC.element_to_be_clickable(
+                (By.XPATH,
+                 ".//button[contains(@class, 'cky-btn-accept') and contains(text(), 'Akceptuj wszystko')]"))
         )
         accept_button.click()
         print("Cookie popup closed")
