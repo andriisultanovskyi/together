@@ -70,7 +70,6 @@ def test_click_ru_button(driver):
     assert element.is_displayed()
 
 
-# The test checks the click of the "Test your Polish" button on the header and opens a web page in Russian
 def test_click_test_your_polish_button(driver):
     homepage = HomePage(driver)
     homepage.open()
